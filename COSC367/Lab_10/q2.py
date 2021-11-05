@@ -1,24 +1,25 @@
 import math
 from collections import defaultdict
+# euclidean distance
+def euclidean_distance(v1, v2):
+    """calculate the euclidean algorithm of two vectors"""
+    return math.sqrt(sum([(a-b)**2 for a,b in zip(v1, v2)]))
 
 def majority_element(labels):
-    """return the most frequence number"""
-    dictionary = defaultdict(int)
+    """takes a sets of outputs abd combine them in order to derive a new prediction"""
+    binary = defaultdict(int)
     for l in labels:
-        if l in dictionary:
-            dictionary[l] += 1
+        if l not in binary:
+            binary[l] = 1
         else:
-            dictionary[l] = 1
-    most_common = max([value for key, value in dictionary.items()])
-    for k, v in dictionary.items():
-        if dictionary[k] == most_common:
-            return k
-
-def euclidean_distance(v1, v2):
-        """calculate the euclidean algorithm of two vectors"""
-        return math.sqrt(sum([(a-b)**2 for a,b in zip(v1, v2)]))
+            binary[l] += 1
+    most_frequent = max(binary.items(), key=lambda x: x[1])
+    return most_frequent[0]
 
 def knn_predict(input, examples, distance, combine, k):
+    """
+    that takes an input and predicts the output by combining the output of the k nearest neighbours
+    """
     new_example = []
     for index, (number, operator) in enumerate(examples):
         euclidean = distance(input, number)
@@ -34,26 +35,21 @@ def knn_predict(input, examples, distance, combine, k):
     label = [oper for (dstance, oper) in selected_neighbour]
     most_common = combine(label)
     return most_common
-    
-
 
 examples = [
-    ([1], 5),
-    ([2], -1),
-    ([5], 1),
-    ([7], 4),
-    ([9], 8),
+    ([2], '-'),
+    ([3], '-'),
+    ([5], '+'),
+    ([8], '+'),
+    ([9], '+'),
 ]
 
-def average(values):
-    return sum(values) / len(values)
-
 distance = euclidean_distance
-combine = average
+combine = majority_element
 
 for k in range(1, 6, 2):
     print("k =", k)
     print("x", "prediction")
     for x in range(0,10):
-        print("{} {:4.2f}".format(x, knn_predict([x], examples, distance, combine, k)))
+        print(x, knn_predict([x], examples, distance, combine, k))
     print()

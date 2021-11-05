@@ -15,10 +15,10 @@ def generate_and_test(csp):
 csp = CSP(
    var_domains = {var:{-1,0,1} for var in 'bc'},
    constraints = {
-      lambda a, b: a * b > 0,
-      lambda b, c: b + c > 0,
+    #   lambda a, b: a * b == -1,
+      lambda b, c: b + c == 1,
       }
-    )
+   )
 solutions = generate_and_test(csp)
 for s in solutions:
     print(s.values())

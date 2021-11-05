@@ -39,8 +39,14 @@ def forward_deduce(kb):
     return c
         
 kb = """
-good_programmer :- correct_code.
-correct_code :- good_programmer.
+a :- b, c.
+b :- d, e.
+b :- g, e.
+c :- e.
+d.
+e.
+f :- a,
+     g.
 """
 
 print(", ".join(sorted(forward_deduce(kb))))

@@ -23,16 +23,22 @@ def arc_consistent(csp):
             csp.var_domains[x] = new_domain     #COMPLETE
     return csp
 
+
 csp_instance = CSP(
-   var_domains = {var:{1,2,3,4} for var in 'abcd'},
-   constraints = {
-      lambda a, b: a >= b,
-      lambda a, b: b >= a,
-      lambda a, b, c: c > a + b,
-      lambda d: d <= d,
+    var_domains={
+        'w': {'as', 'far', 'if', 'know', 'why'},
+        'x': {-1, 0, 1, 2},
+        'y': {-1, 0, 1, 2},
+        'z': {0, 1, 2, 3, 4}
+    },
+   
+   constraints={
+      lambda w, x, y: len(w) == x - y,
+      lambda z: z % 3 == 1,
    }
 )
 arc_consistent(csp_instance)
+
 assert type(csp_instance) is CSP
 print(sorted(csp_instance.var_domains.keys()))
 print(len(csp_instance.constraints))

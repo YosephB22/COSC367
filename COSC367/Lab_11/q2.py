@@ -1,37 +1,39 @@
 import math
-def max_value(tree, result=None):
-    """return the maximum value given what min would choose"""
-    
-    if result == None:
-        result = -math.inf
+def max_value(tree):
+    """maximizing utilities based on what the other oppent chooses"""
     if type(tree) == int:
         return tree
     else:
-        for maxi in tree:
-            result = max(result, min_value(maxi))
-    return (result)
-def min_value(tree, result=None):
-    """return the minimum value given what the max_value function would return"""
-    if result == None:
-        result = math.inf
+        v = -math.inf
+        for t in tree:
+            v = max(v, min_value(t))
+        return v
+
+def min_value(tree):
+    """minimizing utilities based on what the other oppent chooses"""
     if type(tree) == int:
         return tree
     else:
-        for index, maxi in enumerate(tree):
-            result = min(result, max_value(maxi))
-    return (result)
+        v = math.inf
+        for t in tree:
+            v = min(v, max_value(t))
+        return v
+
+
 
 def  max_action_value(game_tree):
-    """return a tuple where the first element is the best max action to consider,
-    the second element is the utility value"""
+    """
+    given a tree return (best action, utility)
+    """
     if type(game_tree) == int:
         return None, game_tree
     else:
         result = []
-        for index, tree in enumerate(game_tree):
-            max_utility = min_value(tree)
-            result.append((index, max_utility))
+        for index, g in enumerate(game_tree):
+            utility = min_value(g)
+            result.append((index, utility))
         return max(result, key=lambda x: x[1])
+
 
 def min_action_value(game_tree):
     """return a tuple where the first element is the best min action to consider,
@@ -43,7 +45,6 @@ def min_action_value(game_tree):
         for index, tree in enumerate(game_tree):
             min_utility = max_value(tree)
             result.append((index, min_utility))
-        print(result)
         return min(result, key=lambda x: x[1])
 
 
