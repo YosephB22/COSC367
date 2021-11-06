@@ -181,6 +181,7 @@ def print_actions(path):
     need to be taken and the total cost of those actions. The path is
     usually a solution (a path from the starting node to a goal
     node."""
+
     if path:
         print("Actions:")
         print(",\n".join("  {}".format(arc.action) for arc in path[1:]) + ".")

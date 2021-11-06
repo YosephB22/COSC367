@@ -39,14 +39,14 @@ def forward_deduce(kb):
     return c
         
 kb = """
-a :- b, c.
-b :- d, e.
-b :- g, e.
-c :- e.
-d.
-e.
-f :- a,
-     g.
+a :- h.
+b :- f.  
+a :- g. 
+c :- d, f.
+d :- k. 
+e :- f.
+c.
+g.
 """
 
 print(", ".join(sorted(forward_deduce(kb))))

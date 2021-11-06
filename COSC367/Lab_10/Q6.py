@@ -39,16 +39,14 @@ def learn_perceptron_parameters(weights, bias, training_examples, learning_rate,
             return weights, bias 
     return weights, bias
 
-weights = [-1, 1]
-bias = 0
+weights = [1, 1]
+bias = 1
 learning_rate = 0.5
 examples = [
-    ([-2, 0], 0),    # index 0 (first example)
-    ([-1, 1], 0),
-    ([1, 1], 0),
-    ([2, 0], 1),
-    ([1, -1], 1),
+    ([1, -1], 0),   # index 0 (first example)
+    ([1, 4], 0),
     ([-1, -1], 1),
+    ([3, 4], 1),
 ]
 max_epochs = 1
 
