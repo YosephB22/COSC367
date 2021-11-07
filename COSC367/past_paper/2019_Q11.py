@@ -1,11 +1,12 @@
 network = {
-    'D': {
+    'B': {
         'Parents': [],
         'CPT': {
             (): 0.001,
          }
     },
-    'B': {
+        
+    'C': {
         'Parents': ['A','D'],
         'CPT': {
             (True,True): 0.95,
@@ -16,17 +17,18 @@ network = {
     },
 
     'A': {
-        'Parents': ['C'],
+        'Parents': ['B'],
         'CPT': {
             (True,): 0.9,
             (False,): 0.05,
         }
     },
 
-    'C': {
-        'Parents': [],
+    'D': {
+        'Parents': ['B'],
         'CPT': {
-            (): 0.7,
+            (True,): 0.7,
+            (False,): 0.01,
         }
     },
 }

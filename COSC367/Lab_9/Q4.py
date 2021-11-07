@@ -24,4 +24,7 @@ def learn_likelihood(file_name, pseudo_count=0):
 
 
 likelihood = learn_likelihood("spam-labelled.csv")
-print(likelihood)
+print("P(X1=True | Spam=False) = {:.5f}".format(likelihood[0][False]))
+print("P(X1=False| Spam=False) = {:.5f}".format(1 - likelihood[0][False]))
+print("P(X1=True | Spam=True ) = {:.5f}".format(likelihood[0][True]))
+print("P(X1=False| Spam=True ) = {:.5f}".format(1 - likelihood[0][True]))
